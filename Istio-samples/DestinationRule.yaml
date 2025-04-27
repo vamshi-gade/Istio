@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule #DR with loadbalancer & TLS settings
+metadata:
+  name: #name of DR
+  labels: 
+    label1: #value1
+  annotations:
+    ann1: #value1  
+spec:
+  host: #hostname of destination
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: # mode of connection MUTUAL
+      clientCertificate: #/etc/certs/myclientcert.pem   #REQUIRED if mode is MUTUAL. The path to the file holding the client-side TLS certificate to use.
+      privateKey: #/etc/certs/client_private_key.pem   #REQUIRED if mode is MUTUAL. The path to the file holding the client’s private key
+      caCertificates: #/etc/certs/rootcacerts.pem    #OPTIONAL: The path to the file containing certificate authority certificates to use in verifying a presented server certificate

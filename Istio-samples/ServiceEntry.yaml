@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry #SE with resolution settings
+metadata:
+  name: #name of SE
+  namespace : #namespace of app
+  labels: 
+    label1: #value1
+  annotations: 
+    ann1: #value1  
+spec:
+  hosts:
+  - #hostname which is out of mesh
+  exportTo: #The ’exportTo’ field allows for control over the visibility of a service declaration to other namespaces in the mesh. By default, a service is exported to all namespaces. The following example restricts the visibility to the current namespace, represented by “.”, so that it cannot be used by other namespaces
+  - "."
+  - #namespace that this Service should be exported to
+  location: MESH_EXTERNAL
+  ports:
+  - number: 80
+    name: http
+    protocol: HTTP
+  resolution: DNS

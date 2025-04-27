@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1 #check docs
+kind: VirtualService #Ingress VS HTTP
+metadata:
+  name: #name of the service
+  namespace: #namespace of application
+  labels: #if any
+    #label1: value1
+  annotations: #if any
+    #ann1: value1
+spec:
+  gateways:
+    - #gateway name
+  hosts:
+  - #inbound host name for the app
+  http:
+  - match:
+    - uri:
+        prefix: #prefix of url/
+    retries:
+      attempts: 
+      perTryTimeout:
+      retryOn: 5xx,gateway-error,connect-failure,refused-stream 
+    rewrite:
+      uri: #rewrite or modify  url to 
+    route:
+    - destination:
+        host: #appname.namespace.svc.cluster.local
+      weight: 100 # end of destination
+    timeout:   
+  
