@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: #name of gateway 
+  namespace: # namespace to which the gateway is applied
+  labels: 
+    label1: value1
+  annotations: 
+    ann1: value1   
+spec:
+  selector:
+    app: # selector name
+  servers: #describes the properties of the proxy on a given load balancer port
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - # hosts exposed by this gateway
+    - 
